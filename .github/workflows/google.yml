@@ -25,11 +25,10 @@ jobs:
       run: docker build . --file Dockerfile --tag gcr.io/inspiring-lens-325816/timesheet-rest:${{github.sha}}
     - name : Docker Push
       run : docker push gcr.io/inspiring-lens-325816/timesheet-rest:${{github.sha}}
-    - name: Deploy service to Cloud Run
-      uses: stefda/action-cloud-run@v1.6
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-cloudrun@v0'
       with:
-       image: gcr.io/inspiring-lens-325816/timesheet-rest:${{github.sha}}
-       service: timesheet-ikea
-       project: inspiring-lens-325816
-       region: europe-west1
-       service key: ${{ env.SERVICE_ACCOUNT_KEY }}
+        service: 'hello-cloud-run'
+        image: 'gcr.io/inspiring-lens-325816/timesheet-rest:${{github.sha}}'
+    - name: 'Use output'
+      run: 'curl "${{ steps.deploy.outputs.url }}"'
