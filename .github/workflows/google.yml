@@ -28,8 +28,8 @@ jobs:
     - name: Deploy service to Cloud Run
       uses: stefda/action-cloud-run@v1.6
       with:
-       image: gcr.io/[your-project]/[image]
+       image: gcr.io/inspiring-lens-325816/timesheet-rest:${{github.sha}}
        service: timesheet-ikea
        project: inspiring-lens-325816
        region: europe-west1
-       service key: SERVICE_ACCOUNT_KEY
+       service key: ${{ env.SERVICE_ACCOUNT_KEY }}
