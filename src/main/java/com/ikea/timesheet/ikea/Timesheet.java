@@ -10,12 +10,9 @@ public class Timesheet {
 
 	private String currentDate;
 
-	public Timesheet() {
-
-	}
-
-	public Timesheet(String loginTime, String logoutTime, String currentDate) {
+	public Timesheet(int id, String loginTime, String logoutTime, String currentDate) {
 		super();
+		this.id = id;
 		this.loginTime = loginTime;
 		this.logoutTime = logoutTime;
 		this.currentDate = currentDate;

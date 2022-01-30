@@ -3,20 +3,23 @@ package com.ikea.timesheet.ikea;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+import java.util.List;
 
-public class TimeSheetmapper implements RowMapper<Timesheet> {
+@Repository
 
-    @Override
-    public Timesheet mapRow(ResultSet arg0, int arg1) throws SQLException {
-        Timesheet tm = new Timesheet();
+public class TimeSheetmapper {
+    @Autowired
+    JdbcTemplate template;
 
-        tm.setId(arg0.getInt("id"));
-        tm.setCurrDate(arg0.getString("curr_date"));
-        tm.setLoginTime(arg0.getString("login_time"));
-        tm.setLogoutTime(arg0.getString("logout_time"));
-
-        return tm;
+    /* Getting all Items from table */
+    public List<Timesheet> getAllItems() {
+        List<Timesheet> items = template.query("select id, curr_date,login_time,logout_time from timesheets",
+                (result, rowNum) -> new Timesheet(result.getInt("id"),
+                        result.getString("curr_date"), result.getString("login_time"),
+                        result.getString("logout_time")));
+        return items;
     }
-
 }
