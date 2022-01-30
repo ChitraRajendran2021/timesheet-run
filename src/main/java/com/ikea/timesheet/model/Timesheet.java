@@ -1,21 +1,23 @@
 package com.ikea.timesheet.model;
 
+import java.sql.Timestamp;
+
 public class Timesheet {
 
 	private long id;
 
-	private String loginTime;
+	private Timestamp loginTime;
 
-	private String logoutTime;
+	private Timestamp logoutTime;
 
 	private String currentDate;
 
-	public Timesheet(int id, String loginTime, String logoutTime, String currentDate) {
+	public Timesheet(int id, String currentDate, Timestamp loginTime, Timestamp logoutTime) {
 		super();
 		this.id = id;
+		this.currentDate = currentDate;
 		this.loginTime = loginTime;
 		this.logoutTime = logoutTime;
-		this.currentDate = currentDate;
 	}
 
 	public long getId() {
@@ -26,19 +28,19 @@ public class Timesheet {
 		this.id = id;
 	}
 
-	public String getLoginTime() {
+	public Timestamp getLoginTime() {
 		return loginTime;
 	}
 
-	public void setLoginTime(String loginTime) {
+	public void setLoginTime(Timestamp loginTime) {
 		this.loginTime = loginTime;
 	}
 
-	public String getLogoutTime() {
+	public Timestamp getLogoutTime() {
 		return logoutTime;
 	}
 
-	public void setLogoutTime(String logoutTime) {
+	public void setLogoutTime(Timestamp logoutTime) {
 		this.logoutTime = logoutTime;
 	}
 

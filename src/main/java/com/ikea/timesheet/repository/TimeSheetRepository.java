@@ -1,11 +1,10 @@
 package com.ikea.timesheet.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.ikea.timesheet.model.Timesheet;
@@ -20,14 +19,28 @@ public class TimeSheetRepository {
     public List<Timesheet> getAllItems() {
         List<Timesheet> items = template.query("select id, curr_date,login_time,logout_time from timesheets",
                 (result, rowNum) -> new Timesheet(result.getInt("id"),
-                        result.getString("curr_date"), result.getString("login_time"),
-                        result.getString("logout_time")));
+                        result.getString("curr_date"), result.getTimestamp("login_time"),
+                        result.getTimestamp("logout_time")));
         return items;
     }
 
-    public int saveTimesheet(long id, String currDate, String loginTime, String logoutTime) {
+    /* Getting all Items from table */
+    public List<Timesheet> findById(Long itemId) {
+        List<Timesheet> items = template.query("SELECT * FROM timesheets WHERE ID=" + itemId,
+                (result, rowNum) -> new Timesheet(result.getInt("id"),
+                        result.getString("curr_date"), result.getTimestamp("login_time"),
+                        result.getTimestamp("logout_time")));
+        return items;
+    }
+
+    public int saveTimesheet(long id, String currDate, Timestamp loginTime, Timestamp logoutTime) {
         String query = "INSERT INTO timesheets VALUES(?,?,?,?)";
         return template.update(query, id, currDate, loginTime, logoutTime);
+    }
+
+    public int updateTimesheet(long id, String currDate, Timestamp loginTime, Timestamp logoutTime) {
+        String query = "UPDATE timesheets SET curr_date = ?, login_time = ?, logout_time = ? WHERE id= ?";
+        return template.update(query, currDate, loginTime, logoutTime, id);
     }
 
     /*

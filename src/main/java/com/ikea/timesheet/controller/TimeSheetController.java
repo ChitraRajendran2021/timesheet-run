@@ -40,19 +40,18 @@ public class TimeSheetController {
     }
 
     // get timesheet by id rest api
-    /*
-     * @GetMapping("/timesheets/{id}")
-     * public ResponseEntity<Timesheet> getTimesheetById(@PathVariable Long id) {
-     * Timesheet timesheet = timeSheetRepo.findById(id);
-     * return ResponseEntity.ok(timesheet);
-     * }
-     */
+
+    @GetMapping("/timesheets/{id}")
+    public ResponseEntity<Timesheet> getTimesheetById(@PathVariable Long id) {
+        Timesheet timesheet = timeSheetRepo.findById(id).get(0);
+        return ResponseEntity.ok(timesheet);
+    }
 
     // update timesheet rest api
 
     @PutMapping("/timesheets/{id}")
     public int updateTimesheet(@PathVariable Long id, @RequestBody Timesheet timesheet) {
-        return timeSheetRepo.saveTimesheet(timesheet.getId(), timesheet.getCurrDate(), timesheet.getLoginTime(),
+        return timeSheetRepo.updateTimesheet(id, timesheet.getCurrDate(), timesheet.getLoginTime(),
                 timesheet.getLogoutTime());
 
     }
