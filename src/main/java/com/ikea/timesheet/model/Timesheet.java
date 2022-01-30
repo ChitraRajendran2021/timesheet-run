@@ -1,4 +1,4 @@
-package com.ikea.timesheet.ikea;
+package com.ikea.timesheet.model;
 
 public class Timesheet {
 

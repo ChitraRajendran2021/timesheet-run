@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@CrossOrigin(origins = "https://hello-cloud-run-web-2ia6hqkrja-uc.a.run.app")
+@CrossOrigin(origins = "*")
 @RestController
 public class TimeSheetController {
     @Autowired

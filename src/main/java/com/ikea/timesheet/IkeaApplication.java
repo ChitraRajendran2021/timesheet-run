@@ -1,4 +1,4 @@
-package com.ikea.timesheet.ikea;
+package com.ikea.timesheet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
