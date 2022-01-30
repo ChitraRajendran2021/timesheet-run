@@ -1,5 +1,6 @@
 package com.ikea.timesheet.ikea;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,9 +19,17 @@ public class RestTimeController {
     }
 
     @GetMapping("/getTimes")
-    public List<String> getTuples() {
-        return this.jdbcTemplate.queryForList("SELECT * FROM timesheets").stream()
-                .map(m -> m.values().toString())
-                .collect(java.util.stream.Collectors.toList());
+    public List<Timesheet> getTuples() {
+        List<Timesheet> tml = new ArrayList<Timesheet>()
+        Timesheet tm = new Timesheet();
+        
+int id = 10;
+                
+                    String query = "SELECT * FROM timesheets";
+                    Timesheet tmlm = jdbcTemplate.queryForObject(
+                      query, new Object[] { id }, new TimeSheetmapper());
+
+tml.add(tmlm);
+             return tml;
     }
 }
