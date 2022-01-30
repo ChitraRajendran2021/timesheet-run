@@ -20,16 +20,16 @@ public class RestTimeController {
 
     @GetMapping("/getTimes")
     public List<Timesheet> getTuples() {
-        List<Timesheet> tml = new ArrayList<Timesheet>()
+        List<Timesheet> tml = new ArrayList<Timesheet>();
         Timesheet tm = new Timesheet();
-        
-int id = 10;
-                
-                    String query = "SELECT * FROM timesheets";
-                    Timesheet tmlm = jdbcTemplate.queryForObject(
-                      query, new Object[] { id }, new TimeSheetmapper());
 
-tml.add(tmlm);
-             return tml;
+        int id = 10;
+
+        String query = "SELECT * FROM timesheets";
+        Timesheet tmlm = jdbcTemplate.queryForObject(
+                query, new Object[] { id }, new TimeSheetmapper());
+
+        tml.add(tmlm);
+        return tml;
     }
 }
