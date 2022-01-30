@@ -36,7 +36,9 @@ public class TimeSheetController {
     @PostMapping("/timesheets")
     public int createTimesheet(@RequestBody Timesheet timesheet) {
         System.out.println("ddddddddddddd");
-        System.out.println(timesheet.toString());
+        System.out.println("AAAAAAAAAAA" + timesheet.getCurrDate());
+        System.out.println("BBBBBBBBBBB" + timesheet.getLoginTime());
+        System.out.println("CCCCCCCCCC" + timesheet.getLogoutTime());
         return timeSheetRepo.saveTimesheet(timesheet.getId(), timesheet.getCurrDate(), timesheet.getLoginTime(),
                 timesheet.getLogoutTime());
     }
