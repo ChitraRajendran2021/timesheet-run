@@ -21,6 +21,7 @@ public class TimeSheetRepository {
                 (result, rowNum) -> new Timesheet(result.getInt("id"),
                         result.getString("curr_date"), result.getTimestamp("login_time"),
                         result.getTimestamp("logout_time")));
+
         return items;
     }
 
