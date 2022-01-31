@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.http.MediaType;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -45,12 +46,15 @@ public class TimeSheetController {
                 timesheet.getLogoutTime());
     }
 
-    @PostMapping("/createtimesheetevent")
+    @PostMapping(value = "/crtime", consumes = { MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
+                    MediaType.APPLICATION_XML_VALUE })
     public int createTimesheetEvent(@RequestBody String timesheet) throws InvalidProtocolBufferException {
         System.out.println("ddddddddddddd");
         System.out.println("AAAAAAAAAAA" + timesheet);
-        String dd = PubsubMessage.parser().parseFrom(timesheet.getBytes()).getData().toStringUtf8();
-        System.out.println("Data: " + dd);
+        // String dd =
+        // PubsubMessage.parser().parseFrom(timesheet.getBytes()).getData().toStringUtf8();
+        // System.out.println("Data: " + dd);
 
         return 1;
     }
