@@ -1,5 +1,6 @@
 package com.ikea.timesheet.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,12 +54,15 @@ public class TimeSheetController {
             MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_XML_VALUE })
     public int createTimesheetEvent(@RequestBody String timesheet)
-            throws InvalidProtocolBufferException, ParseException {
+            throws InvalidProtocolBufferException, ParseException, UnsupportedEncodingException {
         System.out.println("ddddddddddddd");
         System.out.println("AAAAAAAAAAA" + timesheet);
         JSONParser parser = new JSONParser();
         JSONObject json = (JSONObject) parser.parse(timesheet);
         System.out.println(json.get("data"));
+        String aa = (String) json.get("data");
+        String s2 = new String(aa.getBytes(), "UTF-8");
+        System.out.println("---------" + s2);
         // String dd =
         // PubsubMessage.parser().parseFrom(timesheet.getBytes()).getData().toStringUtf8();
         // System.out.println("Data: " + dd);
