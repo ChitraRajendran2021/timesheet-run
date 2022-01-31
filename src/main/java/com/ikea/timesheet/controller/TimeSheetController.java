@@ -9,6 +9,9 @@ import com.google.pubsub.v1.PubsubMessage;
 import com.ikea.timesheet.model.Timesheet;
 import com.ikea.timesheet.repository.TimeSheetRepository;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,9 +52,13 @@ public class TimeSheetController {
     @PostMapping(value = "/crtime", consumes = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_XML_VALUE })
-    public int createTimesheetEvent(@RequestBody String timesheet) throws InvalidProtocolBufferException {
+    public int createTimesheetEvent(@RequestBody String timesheet)
+            throws InvalidProtocolBufferException, ParseException {
         System.out.println("ddddddddddddd");
         System.out.println("AAAAAAAAAAA" + timesheet);
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(timesheet);
+        System.out.println(json.get("data"));
         // String dd =
         // PubsubMessage.parser().parseFrom(timesheet.getBytes()).getData().toStringUtf8();
         // System.out.println("Data: " + dd);
