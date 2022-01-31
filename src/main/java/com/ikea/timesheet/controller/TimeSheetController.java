@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.http.MediaType;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -42,33 +41,10 @@ public class TimeSheetController {
     // create timesheet rest api
     @PostMapping("/timesheets")
     public int createTimesheet(@RequestBody Timesheet timesheet) {
-        System.out.println("ddddddddddddd");
-        System.out.println("AAAAAAAAAAA" + timesheet.getCurrDate());
-        System.out.println("BBBBBBBBBBB" + timesheet.getLoginTime());
-        System.out.println("CCCCCCCCCC" + timesheet.getLogoutTime());
         return timeSheetRepo.saveTimesheet(timesheet.getId(), timesheet.getCurrDate(), timesheet.getLoginTime(),
                 timesheet.getLogoutTime());
     }
 
-    @PostMapping(value = "/crtime", consumes = { MediaType.APPLICATION_JSON_VALUE,
-            MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
-                    MediaType.APPLICATION_XML_VALUE })
-    public int createTimesheetEvent(@RequestBody String timesheet)
-            throws InvalidProtocolBufferException, ParseException, UnsupportedEncodingException {
-        System.out.println("ddddddddddddd");
-        System.out.println("AAAAAAAAAAA" + timesheet);
-        JSONParser parser = new JSONParser();
-        JSONObject json = (JSONObject) parser.parse(timesheet);
-        System.out.println(json.get("data"));
-        String aa = (String) json.get("data");
-        String s2 = new String(aa.getBytes(), "UTF-8");
-        System.out.println("---------" + s2);
-        // String dd =
-        // PubsubMessage.parser().parseFrom(timesheet.getBytes()).getData().toStringUtf8();
-        // System.out.println("Data: " + dd);
-
-        return 1;
-    }
     // get timesheet by id rest api
 
     @GetMapping("/timesheets/{id}")
