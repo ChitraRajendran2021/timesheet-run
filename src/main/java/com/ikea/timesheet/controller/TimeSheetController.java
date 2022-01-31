@@ -48,6 +48,8 @@ public class TimeSheetController {
     public int createTimesheetEvent(@RequestBody PubsubMessage timesheet) {
         System.out.println("ddddddddddddd");
         System.out.println("AAAAAAAAAAA" + timesheet);
+        System.out.println("Data: " + timesheet.getData().toStringUtf8());
+
         return 1;
     }
     // get timesheet by id rest api
