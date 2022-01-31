@@ -43,6 +43,12 @@ public class TimeSheetController {
                 timesheet.getLogoutTime());
     }
 
+    @PostMapping("/createtimesheetevent")
+    public int createTimesheetEvent(@RequestBody String timesheet) {
+        System.out.println("ddddddddddddd");
+        System.out.println("AAAAAAAAAAA" + timesheet);
+        return 1;
+    }
     // get timesheet by id rest api
 
     @GetMapping("/timesheets/{id}")
