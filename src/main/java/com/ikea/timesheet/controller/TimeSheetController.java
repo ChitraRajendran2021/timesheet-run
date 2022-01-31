@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.pubsub.v1.PubsubMessage;
 import com.ikea.timesheet.model.Timesheet;
 import com.ikea.timesheet.repository.TimeSheetRepository;
@@ -45,10 +46,11 @@ public class TimeSheetController {
     }
 
     @PostMapping("/createtimesheetevent")
-    public int createTimesheetEvent(@RequestBody PubsubMessage timesheet) {
+    public int createTimesheetEvent(@RequestBody String timesheet) throws InvalidProtocolBufferException {
         System.out.println("ddddddddddddd");
         System.out.println("AAAAAAAAAAA" + timesheet);
-        System.out.println("Data: " + timesheet.getData().toStringUtf8());
+        String dd = PubsubMessage.parser().parseFrom(timesheet.getBytes()).getData().toStringUtf8();
+        System.out.println("Data: " + dd);
 
         return 1;
     }
