@@ -1,18 +1,12 @@
 package com.ikea.timesheet.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.pubsub.v1.PubsubMessage;
 import com.ikea.timesheet.model.Timesheet;
 import com.ikea.timesheet.repository.TimeSheetRepository;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,6 +28,7 @@ public class TimeSheetController {
     @GetMapping("/getTimes")
     @ResponseBody
     public List<Timesheet> getAllItems() {
+
         return timeSheetRepo.getAllItems();
 
     }
@@ -42,7 +37,7 @@ public class TimeSheetController {
     @PostMapping("/timesheets")
     public int createTimesheet(@RequestBody Timesheet timesheet) {
         return timeSheetRepo.saveTimesheet(timesheet.getId(), timesheet.getCurrDate(), timesheet.getLoginTime(),
-                timesheet.getLogoutTime());
+                timesheet.getLogoutTime(), timesheet.getOverTime());
     }
 
     // get timesheet by id rest api
@@ -53,12 +48,18 @@ public class TimeSheetController {
         return ResponseEntity.ok(timesheet);
     }
 
+    @GetMapping("/overTime")
+    public int getOverTime() {
+
+        return timeSheetRepo.getOverall();
+    }
+
     // update timesheet rest api
 
     @PutMapping("/timesheets/{id}")
     public int updateTimesheet(@PathVariable Long id, @RequestBody Timesheet timesheet) {
         return timeSheetRepo.updateTimesheet(id, timesheet.getCurrDate(), timesheet.getLoginTime(),
-                timesheet.getLogoutTime());
+                timesheet.getLogoutTime(), timesheet.getOverTime());
 
     }
 

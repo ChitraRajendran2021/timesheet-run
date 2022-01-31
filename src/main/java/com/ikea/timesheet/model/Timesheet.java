@@ -12,12 +12,15 @@ public class Timesheet {
 
 	private String currentDate;
 
-	public Timesheet(int id, String currentDate, Timestamp loginTime, Timestamp logoutTime) {
+	private long overTime;
+
+	public Timesheet(int id, String currentDate, Timestamp loginTime, Timestamp logoutTime, long overTime) {
 		super();
 		this.id = id;
 		this.currentDate = currentDate;
 		this.loginTime = loginTime;
 		this.logoutTime = logoutTime;
+		this.overTime = overTime;
 	}
 
 	public long getId() {
@@ -26,6 +29,14 @@ public class Timesheet {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public long getOverTime() {
+		return overTime;
+	}
+
+	public void setOverTime(long overTime) {
+		this.overTime = overTime;
 	}
 
 	public Timestamp getLoginTime() {
