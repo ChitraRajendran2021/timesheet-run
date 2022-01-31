@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.pubsub.v1.PubsubMessage;
 import com.ikea.timesheet.model.Timesheet;
 import com.ikea.timesheet.repository.TimeSheetRepository;
 
@@ -44,7 +45,7 @@ public class TimeSheetController {
     }
 
     @PostMapping("/createtimesheetevent")
-    public int createTimesheetEvent(@RequestBody String timesheet) {
+    public int createTimesheetEvent(@RequestBody PubsubMessage timesheet) {
         System.out.println("ddddddddddddd");
         System.out.println("AAAAAAAAAAA" + timesheet);
         return 1;
